@@ -21,7 +21,7 @@ try:
     row = cursor.fetchone()
     print(row)
 
-    print("Selection successful")
+    print("Selection successful.")
  
 except cx_Oracle.DatabaseError as e:
     print("There is a problem with Oracle", e)
