@@ -1,7 +1,10 @@
 
 # importing module
 
+from getopt import getopt
 import cx_Oracle
+
+
  
 # Create a table in Oracle database
 try:
