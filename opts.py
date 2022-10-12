@@ -1,27 +1,27 @@
 import getopt
+
 import sys
 
-version = '1.0'
-verbose = False
-output_filename = 'default.out'
+VERSION = '1.0'
+VERBOSE = False
 
+INPUT_FILE = ''
 print('ARGV      :', sys.argv[1:])
 
-options, remainder = getopt.getopt(sys.argv[1:], 'o:v', ['output=', 
-                                                         'verbose',
-                                                         'version=',
-                                                         ])
+options, remainder = getopt.getopt(sys.argv[1:], 'f:o:v:', ['output=', 'verbose=',
+                                                            'version=','file=',])
 print('OPTIONS   :', options)
 
 for opt, arg in options:
-    if opt in ('-o', '--output'):
-        output_filename = arg
-    elif opt in ('-v', '--verbose'):
-        verbose = True
+    if opt in ('-v', '--VERBOSE ='):
+        VERBOSE = True
     elif opt == '--version':
-        version = arg
+        VERSION = arg
+    elif opt in ('-f', '--file'):
+        INPUT_FILE = arg
 
-print('VERSION   :', version)
-print('VERBOSE   :', verbose)
-print('OUTPUT    :', output_filename)
-print('REMAINING :', remainder)
+with open(INPUT_FILE, "r") as USER_CSV:
+    CSV_DATA = USER_CSV.read()
+
+
+print(CSV_DATA)
