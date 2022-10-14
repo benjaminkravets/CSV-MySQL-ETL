@@ -1,38 +1,28 @@
 
-# importing module
+# importing required library
+import mysql.connector
+   
+# connecting to the database
+dataBase = mysql.connector.connect(
+                     host = "127.0.0.1",
+                     user = "root",
+                     password = "fonz",
+                     database = "world" )
+   
+# preparing a cursor object
+cursorObject = dataBase.cursor()
+   
+# selecting query
+query = "SELECT ID FROM CITY"
+query += " LIMIT 10"
+print(query)
 
-from getopt import getopt
-import cx_Oracle
-
-
+cursorObject.execute(query)
  
-# Create a table in Oracle database
-try:
+myresult = cursorObject.fetchall()
  
-    con = cx_Oracle.connect('SYSTEM/1@localhost:1521/xe')
-    print(con.version)
+for x in myresult:
+    print(x)
  
-    # Now execute the sqlquery
-    cursor = con.cursor()
- 
-    # Creating a table 
-    
-    #cursor.execute(
-    #    "create table employee(empid integer primary key, name varchar2(30), salary number(10, 2))")
-    cursor.execute("select * from employee")
-
-    row = cursor.fetchone()
-    print(row)
-
-    print("Selection successful.")
- 
-except cx_Oracle.DatabaseError as e:
-    print("There is a problem with Oracle", e)
- 
-# by writing finally if any error occurs
-# then also we can close the all database operation
-finally:
-    if cursor:
-        cursor.close()
-    if con:
-        con.close()
+# disconnecting from server
+dataBase.close()

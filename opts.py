@@ -1,6 +1,8 @@
+from email import header
 import getopt
 import sys
 import csv
+from unittest import result
 
 VERSION = '1.0'
 VERBOSE = False
@@ -20,12 +22,18 @@ for opt, arg in options:
     elif opt in ('-f', '--file'):
         INPUT_FILE = arg
 
-with open(INPUT_FILE, 'r') as USER_CSV:
-    READER = csv.reader(USER_CSV, delimiter=' ', quotechar='|')
-    for row in READER:
-        print(row)
 
-
+with open(INPUT_FILE) as CSV_FILE:
+    CSV_READER = csv.reader( x.replace('\0','') for x in CSV_FILE)
+    headers = [x.strip() for x in next(CSV_READER)]
+    print(headers)
+    for row in CSV_READER:
+        if row:
+            d = dict(zip(headers, map(str.strip, row)))
+            query = "INSERT INTO EMPLOYEES VALUES "
+            for i in range(len(row)):
+                query += ("'" + row[i] + "',")
+            print(query)
 
 
 
