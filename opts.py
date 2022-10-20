@@ -26,6 +26,7 @@ with open(INPUT_FILE) as CSV_FILE:
     CSV_READER = csv.reader( x.replace('\0','') for x in CSV_FILE)
     
     headers = [x.strip() for x in next(CSV_READER)]
+    table = input("Which table should the data be added to?: ")
     """
     table_query = "CREATE TABLE employee ("
     for i in range(len(headers)-1):
@@ -46,7 +47,7 @@ with open(INPUT_FILE) as CSV_FILE:
     for row in CSV_READER:
         if row:
             d = dict(zip(headers, map(str.strip, row)))
-            insert_query = "INSERT INTO employee VALUES "
+            insert_query = "INSERT INTO " + table + " VALUES "
             
             for i in range(len(row)-1):
                 insert_query += ("'" + row[i] + "',")
