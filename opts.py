@@ -2,6 +2,8 @@ from email import header
 import getopt
 import sys
 import csv
+import mysql.connector
+
 
 
 VERBOSE = False
@@ -19,6 +21,16 @@ for opt, arg in options:
     elif opt in ('-i', '--input'):
         INPUT_FILE = arg
    
+   
+# connecting to the database
+dataBase = mysql.connector.connect(
+                     host = "127.0.0.1",
+                     user = "root",
+                     password = "fonz",
+                     database = "world" )
+                     
+cursorObject = dataBase.cursor()
+
 
 
 
@@ -41,7 +53,7 @@ with open(INPUT_FILE) as CSV_FILE:
         table_query = input("Please enter alternate query: ")
 
     
-    print(table_query)
+    
     """
 
     for row in CSV_READER:
