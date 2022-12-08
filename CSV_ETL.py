@@ -3,6 +3,7 @@ import getopt
 import sys
 import csv
 import mysql.connector
+from os import listdir
 
 
 
@@ -37,12 +38,12 @@ query = "SELECT ID FROM CITY"
 query += " LIMIT 10"
 print(query)
 
-cursorObject.execute(query)
+#cursorObject.execute(query)
  
-myresult = cursorObject.fetchall()
+#myresult = cursorObject.fetchall()
  
-for x in myresult:
-    print(x)
+#for x in myresult:
+#    print(x)
  
 # disconnecting from server
 dataBase.close()
@@ -55,22 +56,7 @@ with open(INPUT_FILE) as CSV_FILE:
     
     headers = [x.strip() for x in next(CSV_READER)]
     table = input("Which table should the data be added to?: ")
-    """
-    table_query = "CREATE TABLE employee ("
-    for i in range(len(headers)-1):
-        table_query += (headers[i] + " VARCHAR(20) ")
-    table_query += (headers[len(headers)-1] + "VARCHAR(20))")
-    print("Table creation query is " + table_query)
-    accept = input("Accept query?")
-    if accept in ('Yes', 'yes', 'y', 'Y'):
-        pass
-    else:
-        print("Enter alternate query")
-        table_query = input("Please enter alternate query: ")
 
-    
-    
-    """
 
     for row in CSV_READER:
         if row:
@@ -82,6 +68,7 @@ with open(INPUT_FILE) as CSV_FILE:
             insert_query +=("'" + row[len(row)-1] + "'")
                 
             print(insert_query)
+
 
 
 
