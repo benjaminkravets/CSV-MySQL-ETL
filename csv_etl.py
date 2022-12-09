@@ -25,16 +25,6 @@ dataBase = mysql.connector.connect(
                      database = "world" )
 # preparing a cursor object
 cursorObject = dataBase.cursor()
-# selecting query
-query = "SELECT ID FROM CITY"
-query += " LIMIT 10"
-print(query)
-cursorObject.execute(query)
-myresult = cursorObject.fetchall()
-for x in myresult:
-    print(x)
-# disconnecting from server
-dataBase.close()
 with open(INPUT_FILE) as CSV_FILE:
     CSV_READER = csv.reader( x.replace('\0','') for x in CSV_FILE)
     headers = [x.strip() for x in next(CSV_READER)]
@@ -42,9 +32,15 @@ with open(INPUT_FILE) as CSV_FILE:
     for row in CSV_READER:
         if row:
             d = dict(zip(headers, map(str.strip, row)))
-            insert_query = "INSERT INTO " + table + " VALUES "
+            insert_query = "INSERT INTO " + table + " VALUES ("
             for i in range(len(row)-1):
                 insert_query += ("'" + row[i] + "',")
             insert_query +=("'" + row[len(row)-1] + "'")
+            insert_query += ");"
             print(insert_query)
-            
+            QUERY = insert_query
+            cursorObject.execute(QUERY)
+            myresult = cursorObject.fetchall()
+# Commit and disconnect
+dataBase.commit()
+dataBase.close()
