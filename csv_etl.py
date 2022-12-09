@@ -9,8 +9,7 @@ TABLE = ''
 
 print('ARGV      :', sys.argv[1:])
 
-options, remainder = getopt.getopt(sys.argv[1:], 'f:o:v:i:t:', ['input=', 'verbose=',
-                                                            'version=','file=', 'table='])
+options, remainder = getopt.getopt(sys.argv[1:], 'i:t:', ['input=','table='])
 print('OPTIONS   :', options)
 try:
     for opt, arg in options:
