@@ -3,6 +3,8 @@ import sys
 import csv
 import mysql.connector
 
+"""Script to take a CSV file and generate insertion statements for a MySQL database"""
+
 VERBOSE = False
 INPUT_FILE = ''
 TABLE = ''
