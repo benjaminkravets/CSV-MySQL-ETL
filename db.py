@@ -3,7 +3,6 @@ import os
 
 # Get the list of all files and directories
 path = "C://Users//bakra//Desktop"
-path = "C://"
 dir_list = os.listdir(path)
 
 print("Files and directories in '", path, "' :")
