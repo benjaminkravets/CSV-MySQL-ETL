@@ -8,6 +8,8 @@ import mysql.connector
 VERBOSE = False
 INPUT_FILE = ''
 TABLE = ''
+records = 0
+Initalfunds = 10000
 
 # preparing a cursor object
 
@@ -17,12 +19,19 @@ with open("TQQQ.csv") as CSV_FILE:
     for row in CSV_READER:
         if row:
             d = dict(zip(headers, map(str.strip, row)))
-            insert_query = "INSERT INTO " + TABLE + " VALUES ("
-            for i in range(len(row)-1):
-                insert_query += ("'" + row[i] + "',")
-            insert_query +=("'" + row[len(row)-1] + "'")
-            insert_query += ");"
-            print(insert_query)
+            
+            prox = [0,1,2,3]
+            #for i in range(len(row)-1):
+            #    print(row[i])
+
+            print("Close: "+row[4])
+            records = records + 1
+            
+
+            #insert_query +=("'" + row[len(row)-1] + "'")
+            #insert_query += ");"
+
+print(records)
             
             
 # Commit and disconnect
